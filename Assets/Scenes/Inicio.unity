@@ -238,6 +238,7 @@ GameObject:
   - component: {fileID: 334729964}
   - component: {fileID: 334729966}
   - component: {fileID: 334729965}
+  - component: {fileID: 334729967}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -308,6 +309,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334729963}
   m_CullTransparentMesh: 1
+--- !u!95 &334729967
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334729963}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6b55d0a0898e35d47a6a00a9f8bd2e24, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,7 +576,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1162831799
 Transform:
@@ -797,7 +819,7 @@ GameObject:
   - component: {fileID: 1797225349}
   - component: {fileID: 1797225348}
   m_Layer: 5
-  m_Name: Configuracion
+  m_Name: btnConfiguracion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
