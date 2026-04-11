@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Juego : MonoBehaviour
 {
@@ -12,8 +13,8 @@ public class Juego : MonoBehaviour
     private GameObject txtMarcador;
     private GameObject pelota;
 
-    public static float velBola = 5.0f, velJugador = 4.5f;
-    public int signoX, signoY, velocidad = 1; //Direccion en las que se mueve en horiz o vert
+    public static float velBola = 5.0f, velJugador = 7.5f;
+    public int signoX, signoY, velocidad = 4; //Direccion en las que se mueve en horiz o vert
     
     
     void Start() {
@@ -35,12 +36,38 @@ public class Juego : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Configuracion"); 
+        }
+        if (Pelota.golesJugadorDer == 2 || Pelota.golesJugadorIzq == 2) //terminamos el juego si llegamos al limite de goles permitido
+        {
+            if (Input.anyKey)
+            {
+                Pelota.golesJugadorDer = 0;
+                Pelota.golesJugadorIzq = 0;
+                SceneManager.LoadScene("Configuracion"); 
+            }
+        }
+    }
+    
+    public void EscribeMarcador()
+    {
+        txtMarcador.GetComponent<Text>().text = Pelota.golesJugadorIzq.ToString() + " - " + Pelota.golesJugadorDer.ToString();
+        if (Pelota.golesJugadorDer == 2 || Pelota.golesJugadorIzq == 2) //terminamos el juego si llegamos al limite de goles permitido
+        {
+            txtGameOver.gameObject.SetActive(true);
+            audio.clip = sndGameOver;
+            audio.Play();
+        } else //si se anoto un gol
+        {
+            StartCoroutine(ArbitroPitaInicio());
+        }
     }
 
 //Co - rutina
     IEnumerator ArbitroPitaInicio() {
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(1.0f);
         LanzaPelota();
     }
 

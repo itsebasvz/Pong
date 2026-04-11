@@ -17,12 +17,12 @@ public class Jugadores : MonoBehaviour
     // Movimiento, desplazamiento de arriba hacia abajo, x, y
 
     void Update() {
-        if (Input.GetKey(teclaArriba)){
-            rb2d.MovePosition(rb2d.position + (Vector2.up * Time.deltaTime * Juego.velJugador) );
+        if (Input.GetKey(teclaArriba) && Pelota.numToques<=20){ //establecemos de una vez la velocidad maxima para que no sea injugable
+            rb2d.MovePosition(rb2d.position + (Vector2.up * Time.deltaTime * Juego.velJugador) + new Vector2(0,(float)Pelota.numToques/100.0f)); //vamos aumentando de manera gradual la velocidad sumamos hacia arriba por lo tanto suma en y
         }
 
-        if(Input.GetKey(teclaAbajo)){
-            rb2d.MovePosition(rb2d.position + (Vector2.down * Time.deltaTime * Juego.velJugador) );
+        if(Input.GetKey(teclaAbajo) && Pelota.numToques<=20){
+            rb2d.MovePosition(rb2d.position + (Vector2.down * Time.deltaTime * Juego.velJugador) - new Vector2(0,(float)Pelota.numToques/100.0f)); //restamos hacia abajo por lo tanto resta en y
         }
     }
 }

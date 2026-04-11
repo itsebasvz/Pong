@@ -477,6 +477,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a746c05f7a2c0d47b8d68e82d9182fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snd1: {fileID: 8300000, guid: 030a553d2e4780144ab30327feafffe7, type: 3}
+  snd2: {fileID: 8300000, guid: 92245587b3ebbab4ba29ec86bda6ed8e, type: 3}
+  sndGol: {fileID: 8300000, guid: 0ad2d9d812daadc4eb7c21a7358f0ba5, type: 3}
+  sndPared: {fileID: 8300000, guid: 477d89804c553984eb57b3099a2788a4, type: 3}
 --- !u!1 &888072497
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,7 +754,7 @@ GameObject:
   - component: {fileID: 1220763501}
   - component: {fileID: 1220763500}
   m_Layer: 0
-  m_Name: JugadorDer
+  m_Name: jugadorDer
   m_TagString: jugadorDer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1450,7 +1454,7 @@ GameObject:
   - component: {fileID: 1906872251}
   - component: {fileID: 1906872254}
   m_Layer: 0
-  m_Name: JugadorIzq
+  m_Name: jugadorIzq
   m_TagString: jugadorIzq
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
