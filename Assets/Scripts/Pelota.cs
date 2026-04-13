@@ -10,23 +10,39 @@ public class Pelota : MonoBehaviour
 
     public static int numToques = 0, golesJugadorIzq = 0, golesJugadorDer = 0;
 
+    private bool golAnotado = false;
+
     void Start()
     {
         audio = GetComponent<AudioSource>();
         miJuego = GameObject.Find("juego").gameObject.GetComponent<Juego>();
+        golAnotado = false;
     }
-    private void OnTriggerEnter2D(Collider2D colision) //funcion que detecta colisiones
-    {
-        float compX = 0, compY = 0;  // colision de la pelota respecto al jugador
 
-        if (colision.CompareTag("gol")) // para saber con que porteria pega
+    private void OnTriggerEnter2D(Collider2D colision)
+    {
+        // --- ESCUDO ABSOLUTO ---
+        // Si el candado está cerrado (ya se metió gol), la función hace "return" 
+        // y se cancela inmediatamente. La pelota ignora paletas, paredes y todo lo demás.
+        if (golAnotado) return;
+
+        float compX = 0, compY = 0;
+
+        // --- COLISIÓN CON LA ZONA DE GOL ---
+        if (colision.CompareTag("gol"))
         {
+            golAnotado = true; // CERRAMOS EL CANDADO
+
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            transform.position = new Vector3(0, 0, 0);
+
             audio.clip = sndGol;
             audio.Play();
             numToques = 0;
 
-            GameObject nombrePorteria = colision.gameObject; //guardamos el nombre del objeto con el que esta colisionando
-            if (nombrePorteria.name == "porteriaIzq") //incrementamos goles dependiendo de con quien colisione
+            GameObject nombrePorteria = colision.gameObject;
+
+            if (nombrePorteria.name == "porteriaIzq")
             {
                 golesJugadorDer++;
             }
@@ -36,9 +52,13 @@ public class Pelota : MonoBehaviour
             }
 
             miJuego.EscribeMarcador();
+
+            // Programamos que el escudo se desactive en 1 segundo
+            Invoke("QuitarCandadoGol", 1.0f);
         }
 
-        if (colision.CompareTag("jugadorIzq")) //para saber si colisiono con el jugador izquierdo
+        // --- COLISIÓN CON EL JUGADOR IZQUIERDO ---
+        if (colision.CompareTag("jugadorIzq"))
         {
             audio.clip = snd1;
             audio.Play();
@@ -58,7 +78,8 @@ public class Pelota : MonoBehaviour
             }
         }
 
-        if (colision.CompareTag("jugadorDer")) //para saber si colisiono con el jugador derecho
+        // --- COLISIÓN CON EL JUGADOR DERECHO ---
+        if (colision.CompareTag("jugadorDer"))
         {
             audio.clip = snd2;
             audio.Play();
@@ -78,10 +99,16 @@ public class Pelota : MonoBehaviour
             }
         }
 
-        if (colision.CompareTag("pared")) //para con que pared colisiono
+        // --- COLISIÓN CON LA PARED ---
+        if (colision.CompareTag("pared"))
         {
             audio.clip = sndPared;
             audio.Play();
         }
+    }
+
+    void QuitarCandadoGol()
+    {
+        golAnotado = false;
     }
 }
