@@ -6,59 +6,95 @@ using UnityEngine.SceneManagement;
 
 public class Configuracion : MonoBehaviour
 {
-    public Text op1, op2;
-    public static int tipoJuego = 1; //1 - VS la CPU, 2 vs otra persona
+    // Estos son los INDICADORES (las líneas o subrayados)
+    public GameObject subrayadoCPU, subrayado2J;
+    public GameObject subrayadoIzq, subrayadoDer;
+
+    public static int tipoJuego = 1;
+    public static int ladoJugador = 1;
 
     void Awake()
     {
-        tipoJuego = 1;
-        op1.gameObject.SetActive(true);
-        op2.gameObject.SetActive(false);
+        // Estado inicial: CPU y Lado Izquierdo seleccionados
+        ActualizarVisualizacionModo();
+        ActualizarVisualizacionLado();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Alpha1))
+        // Selección de modo
+        if (Input.GetKeyDown(KeyCode.Alpha1)) { Op1Seleccion(); }
+        if (Input.GetKeyDown(KeyCode.Alpha2)) { Op2Seleccion(); }
+
+        // Selección de lado (BLOQUEADO: SOLO FUNCIONA SI TIPO JUEGO ES 1)
+        if (tipoJuego == 1)
         {
-            BorraSubrayado();
-            op1.gameObject.SetActive(true);
-            tipoJuego = 1;
+            if (Input.GetKeyDown(KeyCode.Alpha3)) { Op3Seleccion(); }
+            if (Input.GetKeyDown(KeyCode.Alpha4)) { Op4Seleccion(); }
         }
-        if (Input.GetKey(KeyCode.Alpha2))
-        {
-            BorraSubrayado();
-            op2.gameObject.SetActive(true);
-            tipoJuego = 2;
-        }
-        if (Input.GetKey(KeyCode.Space)) //Barra espaciadora a Main
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene("Main");
         }
     }
 
-    public void BorraSubrayado()
+    // Funciones de selección para Botones o Teclado
+    public void Op1Seleccion()
     {
-        op1.gameObject.SetActive(false);
-        op2.gameObject.SetActive(false);
-    }
-
-    public void Op1Seleccion() //Botón Op1
-    {
-        BorraSubrayado();
-        op1.gameObject.SetActive(true);
         tipoJuego = 1;
+        ActualizarVisualizacionModo();
+        ActualizarVisualizacionLado(); // Refrescamos para prender el lado
     }
 
-    public void Op2Seleccion() //Botón Op2
+    public void Op2Seleccion()
     {
-        BorraSubrayado();
-        op2.gameObject.SetActive(true);
         tipoJuego = 2;
+        ActualizarVisualizacionModo();
+        ActualizarVisualizacionLado(); // Refrescamos para apagar el lado
     }
 
-    public void ConfiguracionAMain()
+    public void Op3Seleccion()
     {
-        SceneManager.LoadScene("Main");
+        // Doble candado de seguridad por si usas el mouse y haces clic en el botón
+        if (tipoJuego == 1)
+        {
+            ladoJugador = 1;
+            ActualizarVisualizacionLado();
+        }
     }
+
+    public void Op4Seleccion()
+    {
+        if (tipoJuego == 1)
+        {
+            ladoJugador = 2;
+            ActualizarVisualizacionLado();
+        }
+    }
+
+    void ActualizarVisualizacionModo()
+    {
+        if (subrayadoCPU != null) subrayadoCPU.SetActive(tipoJuego == 1);
+        if (subrayado2J != null) subrayado2J.SetActive(tipoJuego == 2);
+    }
+
+    void ActualizarVisualizacionLado()
+    {
+        // Evaluamos si mostrar los indicadores dependiendo del modo de juego
+        if (tipoJuego == 1)
+        {
+            // Muestra el subrayado correspondiente a la elección
+            if (subrayadoIzq != null) subrayadoIzq.SetActive(ladoJugador == 1);
+            if (subrayadoDer != null) subrayadoDer.SetActive(ladoJugador == 2);
+        }
+        else if (tipoJuego == 2)
+        {
+            // Apaga ambos subrayados si estamos jugando contra otra persona
+            if (subrayadoIzq != null) subrayadoIzq.SetActive(false);
+            if (subrayadoDer != null) subrayadoDer.SetActive(false);
+        }
+    }
+
+    public void ConfiguracionAMain() { SceneManager.LoadScene("Main"); }
 }

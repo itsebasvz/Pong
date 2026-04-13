@@ -9,20 +9,17 @@ public class Pelota : MonoBehaviour
     public AudioClip snd1, snd2, sndGol, sndPared;
 
     public static int numToques = 0, golesJugadorIzq = 0, golesJugadorDer = 0;
-   
-   
+
     void Start()
     {
         audio = GetComponent<AudioSource>();
         miJuego = GameObject.Find("juego").gameObject.GetComponent<Juego>();
     }
-
-
     private void OnTriggerEnter2D(Collider2D colision) //funcion que detecta colisiones
     {
-      float compX = 0, compY =0;  // colision de la pelota respecto al jugador
+        float compX = 0, compY = 0;  // colision de la pelota respecto al jugador
 
-      if (colision.CompareTag("gol")) // para saber con que porteria pega
+        if (colision.CompareTag("gol")) // para saber con que porteria pega
         {
             audio.clip = sndGol;
             audio.Play();
@@ -32,7 +29,8 @@ public class Pelota : MonoBehaviour
             if (nombrePorteria.name == "porteriaIzq") //incrementamos goles dependiendo de con quien colisione
             {
                 golesJugadorDer++;
-            } else if (nombrePorteria.name == "porteriaDer")
+            }
+            else if (nombrePorteria.name == "porteriaDer")
             {
                 golesJugadorIzq++;
             }
@@ -52,16 +50,17 @@ public class Pelota : MonoBehaviour
 
             if (alturaColisionIzq >= 0)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(compX * Juego.velBola + numToques , compY * (Juego.velBola * -1) - (float) numToques/2);
-            } else
+                GetComponent<Rigidbody2D>().velocity = new Vector2(compX * Juego.velBola + numToques, compY * (Juego.velBola * -1) - (float)numToques / 2);
+            }
+            else
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(compX * Juego.velBola + numToques , compY * (Juego.velBola * -1) + (float) numToques/2);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(compX * Juego.velBola + numToques, compY * (Juego.velBola * -1) + (float)numToques / 2);
             }
         }
 
         if (colision.CompareTag("jugadorDer")) //para saber si colisiono con el jugador derecho
         {
-             audio.clip = snd2;
+            audio.clip = snd2;
             audio.Play();
             numToques++;
 
@@ -71,10 +70,11 @@ public class Pelota : MonoBehaviour
 
             if (alturaColisionDer >= 0)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(compX * (Juego.velBola * -1) - numToques , compY * (Juego.velBola * -1) - (float) numToques/2);
-            } else
+                GetComponent<Rigidbody2D>().velocity = new Vector2(compX * (Juego.velBola * -1) - numToques, compY * (Juego.velBola * -1) - (float)numToques / 2);
+            }
+            else
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(compX * (Juego.velBola * -1) - numToques , compY * (Juego.velBola * -1) + (float) numToques/2);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(compX * (Juego.velBola * -1) - numToques, compY * (Juego.velBola * -1) + (float)numToques / 2);
             }
         }
 
@@ -84,5 +84,4 @@ public class Pelota : MonoBehaviour
             audio.Play();
         }
     }
-
 }

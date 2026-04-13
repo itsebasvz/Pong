@@ -753,6 +753,7 @@ GameObject:
   - component: {fileID: 1220763502}
   - component: {fileID: 1220763501}
   - component: {fileID: 1220763500}
+  - component: {fileID: 1220763505}
   m_Layer: 0
   m_Name: jugadorDer
   m_TagString: jugadorDer
@@ -912,6 +913,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1220763505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220763498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c239e25fd4df8645bcb111e5b8dde3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MiPelota: {fileID: 677376877}
 --- !u!1 &1269509614
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,9 +960,6 @@ MonoBehaviour:
   sndSilbato: {fileID: 8300000, guid: a69bf6d0331497d4aaa02173ef8ab443, type: 3}
   sndGameOver: {fileID: 8300000, guid: 11be139bc32b8774b91688285ef42b65, type: 3}
   txtGameOver: {fileID: 2029535267}
-  signoX: 0
-  signoY: 0
-  velocidad: 1
 --- !u!4 &1269509616
 Transform:
   m_ObjectHideFlags: 0
@@ -1453,6 +1464,7 @@ GameObject:
   - component: {fileID: 1906872252}
   - component: {fileID: 1906872251}
   - component: {fileID: 1906872254}
+  - component: {fileID: 1906872255}
   m_Layer: 0
   m_Name: jugadorIzq
   m_TagString: jugadorIzq
@@ -1612,6 +1624,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teclaArriba: 119
   teclaAbajo: 115
+--- !u!114 &1906872255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906872248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c239e25fd4df8645bcb111e5b8dde3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MiPelota: {fileID: 677376877}
 --- !u!1 &2010726769
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,21 +13,25 @@ public class Juego : MonoBehaviour
     private GameObject txtMarcador;
     private GameObject pelota;
 
-    public static float velBola = 5.0f, velJugador = 7.5f;
-    public int signoX, signoY, velocidad = 4; //Direccion en las que se mueve en horiz o vert
-    
-    
-    void Start() {
+    public static float velBola = 5.0f, velJugador = 30.0f;
+    private int signoX, signoY, velocidad = 4; //Direccion en las que se mueve en horiz o vert
+
+
+    void Start()
+    {
         txtGameOver.gameObject.SetActive(false);
         audio = GetComponent<AudioSource>();
         pelota = GameObject.Find("pelota");
         txtMarcador = GameObject.Find("txtMarcador");
         txtMarcador.GetComponent<Text>().text = "0 - 0";
 
-//Movimeiento de la pelota
-        if(Random.Range(0,1) > 0.5f) {
+        //Movimeiento de la pelota
+        if (Random.Range(0, 1) > 0.5f)
+        {
             signoX = 1;
-        } else {
+        }
+        else
+        {
             signoX = -1;
         }
         StartCoroutine(ArbitroPitaInicio());
@@ -38,7 +42,7 @@ public class Juego : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            SceneManager.LoadScene("Configuracion"); 
+            SceneManager.LoadScene("Configuracion");
         }
         if (Pelota.golesJugadorDer == 2 || Pelota.golesJugadorIzq == 2) //terminamos el juego si llegamos al limite de goles permitido
         {
@@ -46,11 +50,11 @@ public class Juego : MonoBehaviour
             {
                 Pelota.golesJugadorDer = 0;
                 Pelota.golesJugadorIzq = 0;
-                SceneManager.LoadScene("Configuracion"); 
+                SceneManager.LoadScene("Configuracion");
             }
         }
     }
-    
+
     public void EscribeMarcador()
     {
         txtMarcador.GetComponent<Text>().text = Pelota.golesJugadorIzq.ToString() + " - " + Pelota.golesJugadorDer.ToString();
@@ -59,19 +63,22 @@ public class Juego : MonoBehaviour
             txtGameOver.gameObject.SetActive(true);
             audio.clip = sndGameOver;
             audio.Play();
-        } else //si se anoto un gol
+        }
+        else //si se anoto un gol
         {
             StartCoroutine(ArbitroPitaInicio());
         }
     }
 
-//Co - rutina
-    IEnumerator ArbitroPitaInicio() {
+    //Co - rutina
+    IEnumerator ArbitroPitaInicio()
+    {
         yield return new WaitForSeconds(1.0f);
         LanzaPelota();
     }
 
-    public void LanzaPelota() {
+    public void LanzaPelota()
+    {
         audio.clip = sndSilbato;
         audio.Play();  //Ejecuta el sonido de silbato
         pelota.transform.position = gameObject.transform.position = new Vector3(0, 0, 0); //Reseteo de la pelota, posicion.
