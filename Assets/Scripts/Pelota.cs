@@ -21,7 +21,7 @@ public class Pelota : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D colision)
     {
-        // --- ESCUDO ABSOLUTO ---
+      
         // Si el candado está cerrado (ya se metió gol), la función hace "return" 
         // y se cancela inmediatamente. La pelota ignora paletas, paredes y todo lo demás.
         if (golAnotado) return;
