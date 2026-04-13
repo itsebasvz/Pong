@@ -13,7 +13,7 @@ public class Juego : MonoBehaviour
     private GameObject txtMarcador;
     private GameObject pelota;
 
-    public static float velBola = 5.0f, velJugador = 30.0f;
+    public static float velBola = 5.0f, velJugador = 8.0f;
     private int signoX, signoY, velocidad = 4; //Direccion en las que se mueve en horiz o vert
 
 
@@ -42,7 +42,7 @@ public class Juego : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            SceneManager.LoadScene("Configuracion");
+            SceneManager.LoadScene("Inicio");
         }
         if (Pelota.golesJugadorDer == 2 || Pelota.golesJugadorIzq == 2) //terminamos el juego si llegamos al limite de goles permitido
         {
